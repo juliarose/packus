@@ -1,0 +1,12 @@
+Usage:
+
+  # initialize source files in current working directory
+  packus init src
+
+  # build from source files
+  packus build src output
+
+Commands:
+
+  packus init [src]             Initializes source files in current working directory.
+  packus build [src] [output]   Builds userscript from source directory, outputs to file.

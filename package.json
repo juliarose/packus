@@ -1,0 +1,14 @@
+{
+  "name": "packus",
+  "version": "1.0.0",
+  "description": "Packages a set of related userscript files.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": {
+    "packus": "./index.js"
+  },
+  "author": "Julia Rose",
+  "license": "MIT"
+}
