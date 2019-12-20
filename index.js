@@ -1,10 +1,10 @@
 #!/usr/bin/env node
 const fs = require('fs');
 const path = require('path');
-const builder = require('./builder');
-const initializer = require('./initializer');
-const logger = require('./logger');
-const {checkSrcDirState, checkBuildState} = require('./checkstate');
+const builder = require('./app/builder');
+const initializer = require('./app/initializer');
+const logger = require('./app/logger');
+const {checkSrcDirState, checkBuildState} = require('./app/checkstate');
 
 const exit = () => {
     process.exit(0);
@@ -17,9 +17,15 @@ args.shift();
 
 switch (command) {
     case 'init': {
+        const initialize = (srcDir) => {
+            const templateDir = path.join(__dirname, 'templates');
+            
+            return initializer(srcDir, templateDir);
+        };
+        
         checkSrcDirState(...args)
             //  initalize with directory returned from checked directory
-            .then(initializer)
+            .then(initialize)
             .then(exit)
             .catch((error) => {
                 if (error) {

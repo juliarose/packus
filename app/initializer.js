@@ -1,7 +1,7 @@
 const path = require('path');
 const fs = require('fs');
 
-function initializer(srcDir) {
+function initializer(srcDir, templateDir) {
     const metaPath = path.join(srcDir, 'meta.js');
     const depsPath = path.join(srcDir, 'deps.js');
     const jsDir = path.join(srcDir, 'js');
@@ -21,14 +21,14 @@ function initializer(srcDir) {
     }
     
     if (!fs.existsSync(metaPath)) {
-        const metaTemplate = fs.readFileSync(path.join(__dirname, 'templates/meta.js'), 'utf8');
+        const metaTemplate = fs.readFileSync(path.join(templateDir, 'meta.js'), 'utf8');
         
         // create the meta template file
         fs.writeFileSync(metaPath, metaTemplate, 'utf8');
     }
     
     if (!fs.existsSync(depsPath)) {
-        const depsTemplate = fs.readFileSync(path.join(__dirname, 'templates/deps.js'), 'utf8');
+        const depsTemplate = fs.readFileSync(path.join(templateDir, 'deps.js'), 'utf8');
         
         // create the dependencies script
         fs.writeFileSync(depsPath, depsTemplate, 'utf8');
