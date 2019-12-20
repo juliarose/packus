@@ -4,7 +4,10 @@ const path = require('path');
 const builder = require('./app/builder');
 const initializer = require('./app/initializer');
 const logger = require('./app/logger');
-const {checkSrcDirState, checkBuildState} = require('./app/checkstate');
+const {
+    checkSrcDirState,
+    checkBuildState
+} = require('./app/checkstate');
 
 const exit = () => {
     process.exit(0);

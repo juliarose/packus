@@ -2,7 +2,6 @@ const fs = require('fs');
 const {promisify} = require('util');
 const readline = require('readline');
 const {getPath} = require('./utils');
-const initializer = require('./initializer');
 const exists = promisify(fs.exists);
 const rl = readline.createInterface({
     input: process.stdin,
@@ -24,18 +23,21 @@ function isYes(answer) {
     );
 }
 
+// this checks that the value is set
+// and if not ask to set a default value
 function ensureValueIsDefined(value, question, defaultValue) {
     if (value) {
         // value is already defined, resolve
         return Promise.resolve(value);
     }
     
-    
+    // ask the question
     return askQuestion(question)
+        // check if they say
         .then(isYes)
         .then((yes) => {
             if (!yes) {
-                // stop
+                // cancel the current process
                 return Promise.reject();
             }
             
@@ -54,16 +56,8 @@ function getOutputPath(outputPath) {
 }
 
 function checkSrcDirState(srcDir) {
-    const getSrcDir = (dir) => {
-        return ensureValueIsDefined(
-            dir,
-            'Source directory not given. Use "src" as directory? [Y/n] ',
-            'src'
-        )
-            .then(getPath);
-    };
     const checkSrcDirExistence = (dir) => {
-        const askToInitializeSource = (dir) => {
+        const askToInitializeSrcDir = (dir) => {
             // would you like to create source files?
             const question = `Source directory ${dir} does not exist. Would you like to create it? [Y/n] `;
             
@@ -74,8 +68,6 @@ function checkSrcDirState(srcDir) {
                         return Promise.reject();
                     }
                     
-                    initializer(dir);
-                    
                     return dir;
                 });
         };
@@ -83,14 +75,19 @@ function checkSrcDirState(srcDir) {
         return exists(dir)
             .then((exists) => {
                 if (!exists) {
-                    return askToInitializeSource(dir);
+                    return askToInitializeSrcDir(dir);
                 }
                 
                 return dir;
             });
     };
     
-    return getSrcDir(srcDir)
+    return ensureValueIsDefined(
+        srcDir,
+        'Source directory not given. Use "src" as directory? [Y/n] ',
+        'src'
+    )
+        .then(getPath)
         .then(checkSrcDirExistence);
 }
 
