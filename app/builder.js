@@ -50,19 +50,38 @@ const includeVersion = (deps, meta, tab = '    ') => {
     const version = getVersionFromMeta(meta);
     const versionStr = `// current version number of script\nconst VERSION = \'${version}\';\n`;
     // find last return statement
-    const reLastReturnStatement = /return\s*\{(?!.*return\s*\{)/;
-    const reEmptyLastReturnStatement = /return\s*\{[\s\t\n]*\}(?!.*return\s*\{[\s\t\n]*\})/;
+    const reLastReturnStatement = /return\s*\{(?!.*return\s*\{)/g;
+    const reEmptyLastReturnStatement = /return\s*\{[\s\t\n]*\}(?!.*return\s*\{[\s\t\n]*\})/g;
     const isEmptyReturnStatement = reEmptyLastReturnStatement.test(deps);
     const returnStatementWithVersion = 'return {\n' + getTabs(1, tab) + 'VERSION';
+    const str = deps;
     let replaced;
     
     // add the version to the return statement
     if (isEmptyReturnStatement) {
+        let matches = str.match(reEmptyLastReturnStatement);
         // closed
-        replaced = deps.replace(reEmptyLastReturnStatement, returnStatementWithVersion + '\n}');
+        replaced = str.replace(reLastReturnStatement, (s) => {
+            matches.pop();
+            
+            if (matches.length === 0) {
+                return returnStatementWithVersion + '\n}';
+            }
+            
+            return s;
+        });
     } else {
-        // appended
-        replaced = deps.replace(reLastReturnStatement, returnStatementWithVersion + ',');
+        let matches = str.match(reLastReturnStatement);
+        // closed
+        replaced = str.replace(reLastReturnStatement, (s) => {
+            matches.pop();
+            
+            if (matches.length === 0) {
+                return returnStatementWithVersion + ',';
+            }
+            
+            return s;
+        });
     }
     
     return versionStr + replaced;
