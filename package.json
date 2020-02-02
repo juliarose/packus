@@ -1,6 +1,6 @@
 {
   "name": "packus",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Packages a set of related userscript files.",
   "main": "index.js",
   "scripts": {

@@ -16,7 +16,7 @@ Initialize source files in current working directory.
 
 ```packus init [src]```
 
-src is the directory that will contain source files.
+src is the directory that will contain source files. Defaults to "src" if not given.
 
 Build from source files.
 
