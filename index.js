@@ -3,7 +3,6 @@ const fs = require('fs');
 const path = require('path');
 const builder = require('./lib/builder');
 const initialize = require('./lib/initialize');
-const logger = require('./lib/logger');
 const getPaths = require('./lib/getPaths');
 const colors = {
     grey: '\x1b[2m%s\x1b[0m',
