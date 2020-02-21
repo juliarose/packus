@@ -1,6 +1,6 @@
 {
   "name": "packus",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "description": "Packages a set of related userscript files.",
   "main": "index.js",
   "scripts": {
@@ -10,5 +10,8 @@
     "packus": "./index.js"
   },
   "author": "Julia Rose",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "yargs": "^15.1.0"
+  }
 }

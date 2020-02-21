@@ -5,22 +5,36 @@ packus (short for package userscript) is a command-line tool for packaging users
 ## Installation
 To install globally.
 
-```npm install -g https://github.com/juliarose/packus```
+```
+npm install -g https://github.com/juliarose/packus
+```
 
 To install in a project as a developer dependency.
 
-```npm install --save-dev https://github.com/juliarose/packus```
+```
+npm install --save-dev https://github.com/juliarose/packus
+```
 
 ## Usage
 Initialize source files in current working directory.
 
-```packus init [src]```
+```
+packus init
+```
 
-src is the directory that will contain source files. Defaults to "src" if not given.
+Initialize source files in some other directory.
+
+```
+packus init --src='/home/user/scripts/myscript'
+```
+
+src is the directory that will contain source files. Defaults to current working directory if not given.
 
 Build from source files.
 
-```packus build [src] [output]```
+```
+packus build --src='/home/user/scripts/myscript' --output='./myscript.user.js'
+```
 
 src is the directory containing source files.
 output is the filename of the script.
