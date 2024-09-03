@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-const argv = require('yargs')
+require('yargs')
     .option('src', {
         type: 'string',
         description: 'Source directory (relative or absolute)'
