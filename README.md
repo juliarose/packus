@@ -29,7 +29,7 @@ packus init
 Initialize source files in some other directory.
 
 ```
-packus init --src='/home/user/scripts/myscript'
+packus init --src='./example'
 ```
 
 src is the directory that will contain source files. Defaults to current working directory if not given.
@@ -37,7 +37,7 @@ src is the directory that will contain source files. Defaults to current working
 Build from source files.
 
 ```
-packus build --src='/home/user/scripts/myscript' --output='./myscript.user.js'
+packus build --src='./example' --output='./example/wordsearch.user.js'
 ```
 
 src is the directory containing source files.
